@@ -1,4 +1,8 @@
 
+Stan Mace
+4:40 PM (1 minute ago)
+to me
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -6,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Code Unique</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Favicon -->
     <style>
         body {
             margin: 0;
@@ -24,6 +29,11 @@
             100% { background-position: 0% 50%; }
         }
 
+        h1, p {
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+
         h1 {
             margin-top: 60px;
             font-size: 2.5em;
@@ -36,9 +46,10 @@
             to { text-shadow: 0 0 30px #00ffcc; }
         }
 
-        p {
-            font-size: 1.2em;
-            margin-top: 10px;
+        @keyframes fadeIn {
+            100% {
+                opacity: 1;
+            }
         }
 
         .code {
@@ -100,12 +111,28 @@
             font-size: 0.9em;
             opacity: 0.5;
         }
+
+        /* Mobile-first adjustments */
+        @media (max-width: 768px) {
+            body {
+                font-size: 16px;
+            }
+            .code {
+                font-size: 1.5em;
+                padding: 12px 25px;
+            }
+            button {
+                padding: 10px 20px;
+            }
+        }
     </style>
 </head>
 <body>
     <h1>Merci d'avoir complété l'offre !</h1>
+    <p id="greeting"></p> <!-- Dynamic greeting -->
     <p>Voici ton code unique :</p>
-    <div class="code" id="code">Génération en cours...</div>
+    <div class="code fade-in" id="code">Génération en cours...</div>
+    
     <button onclick="copyCode()">Copier le code</button>
 
     <br>
@@ -113,7 +140,44 @@
 
     <footer>© 2025 - Tous droits réservés | Powered by toi !</footer>
 
+    <p id="visitorCount"></p> <!-- Visitor counter -->
+    <p id="message"></p> <!-- Dynamic message -->
+
+    <audio id="backgroundMusic" loop>
+        <source src="background-music.mp3" type="audio/mp3">
+    </audio>
+    <button onclick="toggleMusic()">Activer/Désactiver Musique</button>
+
+    <button onclick="shareOnTwitter()">Partager sur Twitter</button>
+
     <script>
+        // Greeting message based on time of day
+        const hour = new Date().getHours();
+        let greeting = '';
+        if (hour < 12) {
+            greeting = "Bonjour et bon courage !";
+        } else if (hour < 18) {
+            greeting = "Bonne après-midi !";
+        } else {
+            greeting = "Bonne soirée, héros du soir !";
+        }
+        document.getElementById("greeting").innerText = greeting;
+
+        // Random message generator
+        const messages = [
+            "Utilise ce code avec sagesse…",
+            "Un code, un destin.",
+            "Bravo ! Tu fais partie des élus."
+        ];
+        document.getElementById("message").textContent = messages[Math.floor(Math.random() * messages.length)];
+
+        // Visitor count using localStorage
+        let visitCount = parseInt(localStorage.getItem('visitCount') || '0');
+        visitCount++;
+        localStorage.setItem('visitCount', visitCount);
+        document.getElementById("visitorCount").textContent = `Déjà ${visitCount} utilisateurs ont récupéré leur code !`;
+
+        // Code generation function
         function generateCode(length) {
             const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
             let result = '';
@@ -126,10 +190,28 @@
         const uniqueCode = generateCode(16);
         document.getElementById('code').textContent = uniqueCode;
 
+        // Copy code function
         function copyCode() {
             navigator.clipboard.writeText(uniqueCode);
             alert('Code copié !');
         }
+
+        // Music toggle function
+        function toggleMusic() {
+            const audio = document.getElementById("backgroundMusic");
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+        }
+
+        // Twitter sharing function
+        function shareOnTwitter() {
+            const url = encodeURIComponent(window.location.href);
+            window.open(`https://twitter.com/intent/tweet?text=Voici mon code&url=${url}`, '_blank');
+        }
     </script>
 </body>
 </html>
+
