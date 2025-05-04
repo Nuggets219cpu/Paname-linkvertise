@@ -1,26 +1,25 @@
-
-Stan Mace
-4:40 PM (1 minute ago)
-to me
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Code Unique</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Favicon -->
     <style>
+        /* Style global */
         body {
             margin: 0;
             padding: 0;
             font-family: 'Poppins', sans-serif;
             text-align: center;
             color: white;
-            background: linear-gradient(270deg, #121212, #1f1f1f, #121212);
+            background: linear-gradient(270deg, #1f1f1f, #283747);
             background-size: 600% 600%;
-            animation: backgroundMove 15s infinite;
+            animation: backgroundMove 20s infinite;
+            overflow-x: hidden;
+            position: relative;
+            height: 100vh;
         }
 
         @keyframes backgroundMove {
@@ -29,99 +28,128 @@ to me
             100% { background-position: 0% 50%; }
         }
 
-        h1, p {
-            opacity: 0;
-            animation: fadeIn 1s forwards;
-        }
-
         h1 {
-            margin-top: 60px;
-            font-size: 2.5em;
-            text-shadow: 0 0 20px #00ffcc;
+            margin-top: 80px;
+            font-size: 3.5em;
+            color: #ff4f4f;
+            text-shadow: 0 0 20px #ff4f4f, 0 0 30px #ff4f4f;
             animation: glow 2s ease-in-out infinite alternate;
         }
 
         @keyframes glow {
-            from { text-shadow: 0 0 10px #00ffcc; }
-            to { text-shadow: 0 0 30px #00ffcc; }
+            from { text-shadow: 0 0 10px #ff4f4f; }
+            to { text-shadow: 0 0 40px #ff4f4f; }
         }
 
-        @keyframes fadeIn {
-            100% {
-                opacity: 1;
-            }
+        p {
+            font-size: 1.3em;
+            margin-top: 20px;
         }
 
         .code {
             font-size: 28px;
             font-weight: bold;
             margin: 30px auto;
-            padding: 15px 30px;
+            padding: 20px 40px;
             background: rgba(255, 255, 255, 0.05);
-            border: 2px dashed #00ffcc;
+            border: 2px dashed #ff4f4f;
             border-radius: 12px;
             width: fit-content;
-            box-shadow: 0 0 20px rgba(0, 255, 204, 0.3);
-            transition: transform 0.3s;
+            box-shadow: 0 0 20px rgba(255, 79, 79, 0.5);
+            transition: transform 0.3s, opacity 0.3s, background-color 0.5s ease;
+            opacity: 0;
+            animation: slideIn 1s forwards;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         .code:hover {
             transform: scale(1.05);
+            background-color: #ff4f4f;
         }
 
         button {
-            background: #00ffcc;
+            background: #ff4f4f;
             border: none;
             color: #121212;
-            font-size: 1em;
+            font-size: 1.2em;
             font-weight: bold;
-            padding: 12px 25px;
+            padding: 14px 30px;
             margin-top: 20px;
             border-radius: 8px;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,255,204,0.4);
-            transition: transform 0.2s, background 0.2s;
+            box-shadow: 0 4px 15px rgba(255, 79, 79, 0.6);
+            transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
         }
 
         button:hover {
             transform: translateY(-3px);
-            background: #00e6b8;
+            background: #e04b4b;
+            box-shadow: 0 8px 30px rgba(255, 79, 79, 0.8);
         }
 
         .discord-link {
             display: inline-block;
             margin-top: 40px;
-            padding: 12px 25px;
+            padding: 14px 30px;
             background-color: #5865F2;
             color: white;
             border-radius: 8px;
             text-decoration: none;
             font-weight: bold;
             box-shadow: 0 4px 15px rgba(88,101,242,0.4);
-            transition: transform 0.2s, background 0.2s;
+            transition: transform 0.3s, background 0.3s;
         }
 
         .discord-link:hover {
             transform: translateY(-3px);
             background-color: #4752c4;
+            box-shadow: 0 8px 25px rgba(88,101,242,0.6);
         }
 
         footer {
-            margin-top: 60px;
-            font-size: 0.9em;
-            opacity: 0.5;
+            margin-top: 80px;
+            font-size: 1em;
+            opacity: 0.7;
         }
 
-        /* Mobile-first adjustments */
+        .particle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #ff4f4f;
+            border-radius: 50%;
+            animation: moveParticles 4s infinite ease-in-out;
+            opacity: 0.6;
+        }
+
+        @keyframes moveParticles {
+            0% { transform: translateX(0) translateY(0); }
+            50% { transform: translateX(300px) translateY(300px); }
+            100% { transform: translateX(0) translateY(0); }
+        }
+
+        .particle.large {
+            width: 20px;
+            height: 20px;
+            animation-duration: 6s;
+        }
+
         @media (max-width: 768px) {
-            body {
-                font-size: 16px;
+            h1 {
+                font-size: 2.5em;
             }
+
             .code {
-                font-size: 1.5em;
-                padding: 12px 25px;
+                font-size: 24px;
+                padding: 10px 25px;
             }
-            button {
+
+            button, .discord-link {
+                font-size: 1em;
                 padding: 10px 20px;
             }
         }
@@ -129,55 +157,17 @@ to me
 </head>
 <body>
     <h1>Merci d'avoir complété l'offre !</h1>
-    <p id="greeting"></p> <!-- Dynamic greeting -->
     <p>Voici ton code unique :</p>
-    <div class="code fade-in" id="code">Génération en cours...</div>
-    
+    <div class="code" id="code">Génération en cours...</div>
     <button onclick="copyCode()">Copier le code</button>
 
     <br>
     <a class="discord-link" href="https://discord.gg/Gagm89JJYP" target="_blank">Rejoindre notre serveur Discord</a>
 
-    <footer>© 2025 - Tous droits réservés | Powered by toi !</footer>
-
-    <p id="visitorCount"></p> <!-- Visitor counter -->
-    <p id="message"></p> <!-- Dynamic message -->
-
-    <audio id="backgroundMusic" loop>
-        <source src="background-music.mp3" type="audio/mp3">
-    </audio>
-    <button onclick="toggleMusic()">Activer/Désactiver Musique</button>
-
-    <button onclick="shareOnTwitter()">Partager sur Twitter</button>
+    <footer id="footer">Chargement du message…</footer>
 
     <script>
-        // Greeting message based on time of day
-        const hour = new Date().getHours();
-        let greeting = '';
-        if (hour < 12) {
-            greeting = "Bonjour et bon courage !";
-        } else if (hour < 18) {
-            greeting = "Bonne après-midi !";
-        } else {
-            greeting = "Bonne soirée, héros du soir !";
-        }
-        document.getElementById("greeting").innerText = greeting;
-
-        // Random message generator
-        const messages = [
-            "Utilise ce code avec sagesse…",
-            "Un code, un destin.",
-            "Bravo ! Tu fais partie des élus."
-        ];
-        document.getElementById("message").textContent = messages[Math.floor(Math.random() * messages.length)];
-
-        // Visitor count using localStorage
-        let visitCount = parseInt(localStorage.getItem('visitCount') || '0');
-        visitCount++;
-        localStorage.setItem('visitCount', visitCount);
-        document.getElementById("visitorCount").textContent = `Déjà ${visitCount} utilisateurs ont récupéré leur code !`;
-
-        // Code generation function
+        // Générer un code aléatoire
         function generateCode(length) {
             const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
             let result = '';
@@ -187,31 +177,42 @@ to me
             return result;
         }
 
+        // Afficher le code généré
         const uniqueCode = generateCode(16);
         document.getElementById('code').textContent = uniqueCode;
 
-        // Copy code function
+        // Copier le code
         function copyCode() {
             navigator.clipboard.writeText(uniqueCode);
             alert('Code copié !');
         }
 
-        // Music toggle function
-        function toggleMusic() {
-            const audio = document.getElementById("backgroundMusic");
-            if (audio.paused) {
-                audio.play();
-            } else {
-                audio.pause();
-            }
+        // Messages dynamiques
+        const messages = [
+            "Bienvenue à bord, héros de l'urgence !",
+            "Prêt à secourir ? Voici ton code.",
+            "Ton code d'urgence est prêt, utilise-le bien !",
+            "Un code, un destin… Utilise-le judicieusement."
+        ];
+
+        const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+        document.getElementById("footer").innerHTML = randomMessage;
+
+        // Ajouter des particules dynamiques
+        for (let i = 0; i < 50; i++) {
+            let particle = document.createElement("div");
+            particle.classList.add("particle");
+            if (Math.random() > 0.7) particle.classList.add("large");
+            document.body.appendChild(particle);
+            particle.style.left = `${Math.random() * window.innerWidth}px`;
+            particle.style.top = `${Math.random() * window.innerHeight}px`;
+            particle.style.animationDuration = `${Math.random() * 5 + 3}s`;
         }
 
-        // Twitter sharing function
-        function shareOnTwitter() {
-            const url = encodeURIComponent(window.location.href);
-            window.open(`https://twitter.com/intent/tweet?text=Voici mon code&url=${url}`, '_blank');
-        }
+        // Ajouter un son d'urgence
+        const audio = new Audio('alert-sound.mp3'); // Remplace par le chemin vers ton son
+        audio.loop = true;
+        audio.play();
     </script>
 </body>
 </html>
-
