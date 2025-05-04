@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ton code unique</title>
+    <title>Code Unique</title>
     <style>
         body { font-family: Arial, sans-serif; text-align: center; margin-top: 100px; }
-        .code { font-size: 24px; font-weight: bold; margin-top: 20px; }
+        .code { font-size: 24px; font-weight: bold; margin-top: 20px; word-break: break-all; }
     </style>
 </head>
 <body>
@@ -15,24 +15,17 @@
     <div class="code" id="code">Génération en cours...</div>
 
     <script>
-        // Liste des codes uniques
-        const codes = [
-            "CODE123", "CODE456", "CODE789", "CODE101", "CODE202"
-        ];
-
-        // Fonction pour choisir un code aléatoire
-        function getRandomCode() {
-            const index = Math.floor(Math.random() * codes.length);
-            return codes[index];
+        function generateCode(length) {
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let result = '';
+            for (let i = 0; i < length; i++) {
+                result += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            return result;
         }
 
-        // Afficher le code
-        const codeElement = document.getElementById("code");
-        const code = getRandomCode();
-        codeElement.textContent = code;
-
-        // (optionnel) Supprimer le code de la liste après l'avoir affiché
-        // codes.splice(index, 1); // À gérer côté serveur si tu veux vraiment l'unicité
+        const uniqueCode = generateCode(16); // 16 caractères aléatoires
+        document.getElementById('code').textContent = uniqueCode;
     </script>
 </body>
 </html>
